@@ -14,5 +14,6 @@
       </Label>
       <Button fx:id="selectSearchMovieBtn" layoutX="155.0" layoutY="96.0" mnemonicParsing="false" onAction="#selectSearchMovies" prefHeight="88.0" prefWidth="112.0" text="Search movies" />
       <Button fx:id="selectSearchPeopleBtn" layoutX="328.0" layoutY="96.0" mnemonicParsing="false" onAction="#selectSearchPeople" prefHeight="88.0" prefWidth="112.0" text="Search people" />
+      <Button fx:id="showPopularBtn" layoutX="155.0" layoutY="217.0" mnemonicParsing="false" onAction="#selectShowPopularMovies" prefHeight="88.0" prefWidth="112.0" text="Show popular movies" textAlignment="CENTER" wrapText="true" />
    </children>
 </AnchorPane>

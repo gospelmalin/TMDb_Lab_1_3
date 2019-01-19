@@ -31,5 +31,11 @@ public class StartViewController {
     //	ViewController.activate("SearchPeopleView");
 
     }
+    
+    @FXML
+    void selectShowPopularMovies(ActionEvent event) {
+    	System.out.println("Show Popular Movies View should open"); //TODO TEMP
+       	ViewController.activate("ShowPopularMovies");
+    }
 
 }

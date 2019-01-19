@@ -24,6 +24,9 @@ public class SearchPeopleController {
 
     @FXML
     private TextField personNameTextField;
+    
+    @FXML
+    private TextField biographyTxt;
 
     @FXML
     private Button showSelectedPersonBtn;
@@ -120,7 +123,22 @@ public class SearchPeopleController {
 
     @FXML
     void showSelectedPerson(ActionEvent event) {
-    	//TODO
+    	int id = Integer.parseInt(personIdTextField.getText());
+    	String idString = personIdTextField.getText();
+    	System.out.println("selected id is: " + idString);
+    	ArrayList<Movie> knownForMovies = null; //TODO
+    	JsonHandler j = new JsonHandler();
+    	Person selectedPerson = new Person();
+    	selectedPerson = j.createSelectedPersonFromJsonString(id, knownForMovies);
+    	System.out.println("This is selected person: " + selectedPerson);
+    	//populate Person details textfields
+    	idTxt.setText(String.valueOf(selectedPerson.getId()));
+    	nameTxt.setText(selectedPerson.getName());
+    	genderTxt.setText(selectedPerson.getGender());
+    	birthdayTxt.setText(selectedPerson.getBirthday());
+    	deathdayTxt.setText(selectedPerson.getDeathday());
+    	popularityTxt.setText(String.valueOf(selectedPerson.getPopularity()));
+    	biographyTxt.setText(selectedPerson.getBiography());
     }
     
  // Updating table with result from Db search

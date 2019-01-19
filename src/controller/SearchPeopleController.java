@@ -18,81 +18,118 @@ import model.Person;
 import repository.JsonHandler;
 import utility.Util;
 
+/**
+ * The Class SearchPeopleController handles what is related to the Search People view.
+ */
 public class SearchPeopleController {
 
+    /** The person id text field. */
     @FXML
     private TextField personIdTextField;
 
+    /** The person name text field. */
     @FXML
     private TextField personNameTextField;
     
+    /** The biography text field. */
     @FXML
     private TextField biographyTxt;
 
+    /** The show selected person button. */
     @FXML
     private Button showSelectedPersonBtn;
 
+    /** The home button. */
     @FXML
     private Button homeBtn;
 
+    /** The person table. */
     @FXML
     private TableView<Person> personTable;
 
+    /** The person id column. */
     @FXML
     private TableColumn<Person, Integer> personIdColumn;
 
+    /** The person name column. */
     @FXML
     private TableColumn<Person, String> personNameColumn;
 
+    /** The person popularity column. */
     @FXML
     private TableColumn<Person, Double> personPopularityColumn;
 
+    /** The refresh table button. */
     @FXML
     private Button refreshTableBtn;
 
+    /** The id text field. */
     @FXML
     private TextField idTxt;
 
+    /** The birthday text field. */
     @FXML
     private TextField birthdayTxt;
 
+    /** The popularity text field. */
     @FXML
     private TextField popularityTxt;
 
+    /** The gender text field. */
     @FXML
     private TextField genderTxt;
 
+    /** The deathday text field. */
     @FXML
     private TextField deathdayTxt;
 
+    /** The name text field. */
     @FXML
     private TextField nameTxt;
 
+    /** The known for movies table. */
     @FXML
     private TableView<Movie> knownForMoviesTable;
 
+    /** The movie id column. */
     @FXML
     private TableColumn<Movie, Integer> movieIdCol;
 
+    /** The title column. */
     @FXML
     private TableColumn<Movie, String> titleCol;
     
+    /** The name keyword. */
     @FXML
     private TextField nameKeyword;
 
+    /** The search person button. */
     @FXML
     private Button searchPersonBtn;
     
+    /** The known for movies text area. */
     @FXML
     private TextArea knownForMoviesTextArea;
     
+    /** The Person. */
     Person p;
+    
+    /** The Movie. */
     Movie m;
+    
+    /** The JsonHandler. */
     JsonHandler jH;
 
+	/** The resulting persons ArrayList. */
 	ArrayList<Person> resultingPersons;
+	
+	/** The known for movies ArrayList. */
 	ArrayList<Movie> knownForMovies = new ArrayList<Movie>();
     
+    /**
+ 	 * Initialize the controller class.
+ 	 */
+ 	//This method is automatically called after the fxml file has been loaded.
     @FXML
     private void initialize () {
     	System.out.println("SearchPersonController initiated!");
@@ -105,20 +142,25 @@ public class SearchPeopleController {
     	personIdColumn.setCellValueFactory(new PropertyValueFactory<Person, Integer>("id"));
     	personNameColumn.setCellValueFactory(new PropertyValueFactory<Person, String>("name"));
     	personPopularityColumn.setCellValueFactory(new PropertyValueFactory<Person, Double>("popularity"));
-    	
-    	String result = "x";
+    	// Known for movies text Area
+    	String result = "";
     	updateKnownForMoviesTextArea(result);
     }
     
+    /**
+     * Update known for movies text area.
+     *
+     * @param result the result
+     */
     private void updateKnownForMoviesTextArea(String result) {
-    	knownForMoviesTextArea.setText(result); //alt 1
-	//	resultTextArea.setText(s);//alt2
-    	//resultTextArea.setText(h.getMovies().toString());
-		System.out.println("text set in textArea");
-		knownForMoviesTextArea.getText();
-		
+    	knownForMoviesTextArea.setText(result);
 	}
 
+	/**
+	 * Table clicked.
+	 *
+	 * @param event the event
+	 */
 	@FXML
     private void TableClicked(MouseEvent event) {
         p = personTable.getSelectionModel().getSelectedItem();
@@ -128,43 +170,49 @@ public class SearchPeopleController {
     
    
 
+    /**
+     * Open start view.
+     *
+     * @param event the event
+     */
     @FXML
     void openStartView(ActionEvent event) {
     	System.out.println("Start view should open");
     	ViewController.activate("StartView");
     }
 
+    /**
+     * Refresh table.
+     *
+     * @param event the event
+     */
     @FXML
     void refreshTable(ActionEvent event) {
     	updateTable();
     }
 
+    /**
+     * Show selected person.
+     *
+     * @param event the event
+     */
     @FXML
     void showSelectedPerson(ActionEvent event) {
     	knownForMoviesTextArea.setText("");
     	ArrayList<Movie> knownForMovies = new ArrayList<Movie>();
-    	System.out.println("resultingPersons size when showSelectedPerson starts: " + resultingPersons.size());
-    	System.out.println("Detta är resultingPersons: " + resultingPersons);
     	int id = Integer.parseInt(personIdTextField.getText());
     	for (int i=0; i<resultingPersons.size(); i++) {
     		if (resultingPersons.get(i).getId() == id) {
     			knownForMovies = resultingPersons.get(i).getKnownForMovies();
-    			System.out.println("knownForMovies sent as indata were: " + knownForMovies);
     		}
     	}
     	String s="";
     	String idString = personIdTextField.getText();
     	System.out.println("selected id is: " + idString);
-    	//int i = resultingPersons.indexOf(id);
-    	//System.out.println("i is " + i);
-    	//knownForMovies = resultingPersons.get(i).getKnownForMovies(); //TODO
-    	//System.out.println("knownForMovies sent as indata were: " + knownForMovies);
-    	//knownForMovies = null;
     	JsonHandler j = new JsonHandler();
     	Person selectedPerson = new Person();
     	selectedPerson = j.createSelectedPersonFromJsonString(id, knownForMovies);
-    	System.out.println("This is selected person: " + selectedPerson);
-    	//populate Person details textfields
+    	//populate Person details text fields
     	idTxt.setText(String.valueOf(selectedPerson.getId()));
     	nameTxt.setText(selectedPerson.getName());
     	genderTxt.setText(selectedPerson.getGender());
@@ -172,19 +220,19 @@ public class SearchPeopleController {
     	deathdayTxt.setText(selectedPerson.getDeathday());
     	popularityTxt.setText(String.valueOf(selectedPerson.getPopularity()));
     	biographyTxt.setText(selectedPerson.getBiography());
-    	//populate knownForMoviesTable
+    	//populate knownForMoviesTable / Text area
     	knownForMovies = selectedPerson.getKnownForMovies();
-    	//updateKnownForMoviesTable();
+    	//updateKnownForMoviesTable(); // Not in use in this version
     	for (int k=0; k<knownForMovies.size(); k++) {
     		String movieTitle = knownForMovies.get(k).getTitle();
     		s = s  + movieTitle + "\n"; 
-    	}
-    	
+    	}  	
     	knownForMoviesTextArea.setText(s);
-    	//knownForMoviesTextArea.setText(knownForMovies.toString());
-    	
     }
     
+ /**
+  * Update table.
+  */
  // Updating table with result from Db search
     private void updateTable() {
 		ObservableList<Person> list = FXCollections.observableArrayList(resultingPersons);
@@ -192,27 +240,21 @@ public class SearchPeopleController {
     }
     
     
+    /**
+     * Search person.
+     *
+     * @param event the event
+     */
     @FXML
     void searchPerson(ActionEvent event) {
-    	System.out.println("searchPerson in SearchPersonController is called");
-    	
     	String name = nameKeyword.getText();
-    	System.out.println("This is the name entered in Search People enter name " + nameKeyword); //TODO TEMP
-    	String message = null;
+       	String message = null;
     	Util util = new Util();
     	name = util.validateString(name); // Validation of entered data	
 		// Creating instance of JsonHandler for parsing the JSON data
 		JsonHandler jH = new JsonHandler();
 		ArrayList<Person> persons = jH.createPersonArrayFromJsonString(name); //1
-		System.out.println("These are the persons in the array when recieved FROM jsonhandler: " + persons);
-		//jH.createMovieArrayFromJsonString(titleKeyword); 
-		//movies = jH.getMovies(); 
 		message = showPersons(persons);
-		System.out.println("This is the result message from Persons search: \n" + message); //TODO TEMP
-    	
-    	
-    	// TODO?
-    	
     	// Get the result into the array list used to build the table
     	resultingPersons = jH.getPersons();
 		// Update table
@@ -233,7 +275,6 @@ public class SearchPeopleController {
 			double popularity = persons.get(i).getPopularity();
 			message = message + "\nPerson id: " + id + "\nName: " + name + "\nPopularity: " + popularity + "\n";
 		}
-		System.out.println("ShowPersons prints message: " + message); //TODO TEMP
 		return message;
 	}
 }

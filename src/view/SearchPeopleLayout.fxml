@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.SearchPeopleController">
+   <children>
+      <Label alignment="CENTER" layoutX="5.0" layoutY="6.0" prefHeight="42.0" prefWidth="177.0" text="Select person">
+         <font>
+            <Font size="24.0" />
+         </font>
+      </Label>
+      <TextField fx:id="personIdTextField" layoutX="26.0" layoutY="217.0" prefHeight="25.0" prefWidth="77.0" />
+      <TextField fx:id="personNameTextField" layoutX="109.0" layoutY="217.0" prefHeight="25.0" prefWidth="362.0" />
+      <Button fx:id="showSelectedPersonBtn" layoutX="479.0" layoutY="217.0" mnemonicParsing="false" onAction="#showSelectedPerson" text="Show person" />
+      <Label layoutX="26.0" layoutY="200.0" text="Id" />
+      <Label layoutX="199.0" layoutY="200.0" text="Name" />
+      <Button fx:id="homeBtn" layoutX="26.0" layoutY="363.0" mnemonicParsing="false" onAction="#openStartView" text="Home" />
+      <TableView fx:id="personTable" layoutX="26.0" layoutY="82.0" prefHeight="118.0" prefWidth="537.0">
+        <columns>
+          <TableColumn fx:id="personIdColumn" editable="false" prefWidth="75.0" text="Id" />
+          <TableColumn fx:id="personNameColumn" editable="false" prefWidth="308.3333740234375" text="Name" />
+            <TableColumn fx:id="personPopularityColumn" editable="false" minWidth="0.0" prefWidth="152.6666259765625" text="Popularity" />
+        </columns>
+      </TableView>
+      <Button fx:id="refreshTableBtn" layoutX="493.0" layoutY="15.0" mnemonicParsing="false" onAction="#refreshTable" text="Refresh table" />
+      <TextField fx:id="idTxt" layoutX="27.0" layoutY="287.0" prefHeight="25.0" prefWidth="98.0" promptText="id" />
+      <TextField fx:id="birthdayTxt" layoutX="26.0" layoutY="331.0" prefHeight="25.0" prefWidth="98.0" promptText="birthday" />
+      <TextField fx:id="popularityTxt" editable="false" layoutX="272.0" layoutY="331.0" prefHeight="25.0" prefWidth="98.0" promptText="popularity" />
+      <Label layoutX="274.0" layoutY="313.0" text="Popularity" />
+      <TextField fx:id="genderTxt" editable="false" layoutX="272.0" layoutY="287.0" prefHeight="25.0" prefWidth="98.0" promptText="gender" />
+      <TextField fx:id="deathdayTxt" editable="false" layoutX="137.0" layoutY="331.0" prefHeight="25.0" prefWidth="124.0" promptText="deathday" />
+      <Label layoutX="27.0" layoutY="270.0" text="Person id" />
+      <Label layoutX="273.0" layoutY="272.0" text="Gender" />
+      <Label layoutX="138.0" layoutY="316.0" text="Deathday" />
+      <Label layoutX="26.0" layoutY="316.0" text="Birth date" />
+      <Separator layoutX="26.0" layoutY="248.0" prefHeight="1.0" prefWidth="537.0" />
+      <Label layoutX="29.0" layoutY="250.0" text="Person details">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Label>
+      <TextField fx:id="nameTxt" layoutX="137.0" layoutY="288.0" prefHeight="25.0" prefWidth="124.0" promptText="name" />
+      <Label layoutX="137.0" layoutY="271.0" text="Name" />
+      <Label layoutX="383.0" layoutY="269.0" text="Known for movies" />
+      <TableView fx:id="knownForMoviesTable" layoutX="381.0" layoutY="286.0" prefHeight="109.0" prefWidth="214.0">
+         <columns>
+            <TableColumn fx:id="movieIdCol" editable="false" prefWidth="75.0" text="Movie id" />
+            <TableColumn fx:id="titleCol" editable="false" prefWidth="137.0" text="Title" />
+         </columns>
+      </TableView>
+      <TextField fx:id="nameKeyword" layoutX="24.0" layoutY="50.0" prefHeight="25.0" prefWidth="157.0" promptText="Enter name" />
+      <Button fx:id="searchPersonBtn" layoutX="193.0" layoutY="50.0" mnemonicParsing="false" onAction="#searchPerson" text="Search person" />
+   </children>
+</AnchorPane>

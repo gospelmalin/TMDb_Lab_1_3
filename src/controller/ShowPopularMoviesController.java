@@ -1,7 +1,6 @@
 package controller;
 
 import java.util.ArrayList;
-
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -18,56 +17,78 @@ import model.Movie;
 import repository.JsonHandler;
 import utility.Util;
 
+/**
+ * The Class ShowPopularMoviesController handles anything 
+ * related to the Show Popular Movies view.
+ */
 public class ShowPopularMoviesController {
 
+    /** The movie id column. */
     @FXML
     private AnchorPane movieIdCol;
 
+    /** The movie table. */
     @FXML
     private TableView<Movie> movieTable;
 
+    /** The id column. */
     @FXML
     private TableColumn<Movie, Integer> idCol;
 
+    /** The title column. */
     @FXML
     private TableColumn<Movie, String> titleCol;
 
+    /** The overview column. */
     @FXML
     private TableColumn<Movie, String> overviewCol;
 
+    /** The popularity column. */
     @FXML
     private TableColumn<Movie, Double> popularityCol;
 
+    /** The movie details text area. */
     @FXML
     private TextArea movieDetailsTextArea;
 
+    /** The movie id text field. */
     @FXML
     private TextField movieIdTxt;
     
+    /** The movie title text field. */
     @FXML
     private TextField movieTitleTxt;
 
+    /** The show movie details button. */
     @FXML
     private Button showMovieDetailsBtn;
 
+    /** The home button. */
     @FXML
     private Button homeBtn;
     
-    @FXML
-    private Button refreshPopularBtn;
     
+    /** The m - movie. */
     Movie m;
+    
+    /** The JsonHandler. */
     JsonHandler jH;
+    
+    /** The resulting movies ArrayList. */
     ArrayList<Movie> resultingMovies;
+    
+    /** The resulting movie details ArrayList. */
     ArrayList<Movie> resultingMovieDetails;
     
+    /**
+     * Initializing the controller class.
+     */
+    //This method is automatically called after the fxml file has been loaded.
     @FXML
     private void initialize () {
-    	System.out.println("ShowPopularMovieController initiated!");
-    	
+    //	System.out.println("ShowPopularMovieController initiated!");
     	String details = "";
     	updateMovieDetailsTextArea(details);
-    	
     	
     	// mouseclick eventhandler
     	movieTable.setOnMouseClicked(this::TableClicked);
@@ -79,6 +100,11 @@ public class ShowPopularMoviesController {
     	updateTable();
     }
     
+    /**
+     * Table clicked.
+     *
+     * @param event the event
+     */
     @FXML
     private void TableClicked(MouseEvent event) {
         m = movieTable.getSelectionModel().getSelectedItem();
@@ -86,45 +112,36 @@ public class ShowPopularMoviesController {
         movieTitleTxt.setText(m.getTitle());
     }
 
+    /**
+     * Open start view.
+     *
+     * @param event the event
+     */
     @FXML
     void openStartView(ActionEvent event) {
     	System.out.println("Start view should open");
     	ViewController.activate("StartView");
     }
 
+    /**
+     * Show movie details in text area.
+     *
+     * @param event the event
+     */
     @FXML
     void showMovieDetails(ActionEvent event) {
-    	System.out.println("showMovieDetails in ShowPopularMovieController is called");
-    	
     	String idString = movieIdTxt.getText();
-    	System.out.println("This is selected id in showPopularmoviecontroller showMoviedetails " + idString); //TODO TEMP
     	String message = null;
     	Util util = new Util();
     	idString = util.validateString(idString); // Validation of entered data	
 		// Creating instance of JsonHandler for parsing the JSON data
     	JsonHandler h = new JsonHandler();
     	h.createMovieDetailsArrayFromJsonString(idString, resultingMovies);
-    	//h.createMovieDetailsArrayFromJsonString(idString); 
 		ArrayList<Movie> movieDetails = h.getMovieDetails(); 
-		System.out.println("These are the movie details for the selected movie when recieved FROM jsonhandler: " + movieDetails); //TODO TEMP
-		//
 		message = showMovies(movieDetails);
-		System.out.println("This is the result message from Movie Details search: \n" + message); //TODO TEMP
-    	
-    	
-    	// TODO?
-    	
-    	// Get the result into the array list used to build the table
+    	// Get the result into the array list used to build the table (currently not used)
 		resultingMovieDetails = h.getMovieDetails();
-		// Update table
-    //	updateTable();
-    	
-    	
     	movieDetailsTextArea.setText(h.getMovieDetails().toString());
-    //	movieDetailsTextArea.getText(); // TODO is this needed?
-    	
-    	//movieDetailsTextArea.setText(s);
-    	// TODO
     }
     
     /**
@@ -147,8 +164,10 @@ public class ShowPopularMoviesController {
 		
 	}
 	
-	
-	 
+ 
+ /**
+  * Update table.
+  */
  // Updating table with result from Db search
 	private void updateTable() {
     	jH = new JsonHandler();
@@ -157,6 +176,11 @@ public class ShowPopularMoviesController {
 		movieTable.setItems((ObservableList<Movie>) list);
     }
     
+ /**
+  * Update movie details text area.
+  *
+  * @param result the result
+  */
  private void updateMovieDetailsTextArea(String result) {
 		movieDetailsTextArea.setText(result); ;		
 	}

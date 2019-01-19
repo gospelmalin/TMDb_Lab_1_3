@@ -119,7 +119,7 @@ public class ShowPopularMoviesController {
      */
     @FXML
     void openStartView(ActionEvent event) {
-    	System.out.println("Start view should open");
+    	//System.out.println("Start view should open");
     	ViewController.activate("StartView");
     }
 

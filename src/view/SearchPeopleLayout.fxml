@@ -21,7 +21,7 @@
       <Button fx:id="showSelectedPersonBtn" layoutX="479.0" layoutY="217.0" mnemonicParsing="false" onAction="#showSelectedPerson" text="Show person" />
       <Label layoutX="26.0" layoutY="200.0" text="Id" />
       <Label layoutX="199.0" layoutY="200.0" text="Name" />
-      <Button fx:id="homeBtn" layoutX="26.0" layoutY="363.0" mnemonicParsing="false" onAction="#openStartView" text="Home" />
+      <Button fx:id="homeBtn" layoutX="25.0" layoutY="370.0" mnemonicParsing="false" onAction="#openStartView" text="Home" />
       <TableView fx:id="personTable" layoutX="26.0" layoutY="82.0" prefHeight="118.0" prefWidth="537.0">
         <columns>
           <TableColumn fx:id="personIdColumn" editable="false" prefWidth="75.0" text="Id" />
@@ -57,5 +57,7 @@
       </TableView>
       <TextField fx:id="nameKeyword" layoutX="24.0" layoutY="50.0" prefHeight="25.0" prefWidth="157.0" promptText="Enter name" />
       <Button fx:id="searchPersonBtn" layoutX="193.0" layoutY="50.0" mnemonicParsing="false" onAction="#searchPerson" text="Search person" />
+      <TextField fx:id="biographyTxt" layoutX="84.0" layoutY="370.0" prefHeight="25.0" prefWidth="285.0" promptText="biography" />
+      <Label layoutX="84.0" layoutY="354.0" text="Biography" />
    </children>
 </AnchorPane>

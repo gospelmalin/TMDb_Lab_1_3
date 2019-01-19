@@ -1,7 +1,6 @@
 package application;
 	
 import java.io.IOException;
-
 import controller.ViewController;
 import javafx.application.Application;
 import javafx.stage.Stage;
@@ -11,15 +10,25 @@ import javafx.scene.layout.BorderPane;
 import javafx.fxml.FXMLLoader;
 
 
+/**
+ * The Class Main.
+ */
 public class Main extends Application {
 	
+	/** The primary stage. */
 	//PrimaryStage
     private Stage primaryStage;
  
+    /** The root layout. */
     //BorderPane of RootLayout
     private BorderPane rootLayout;
+    
+    /** The scene. */
     public static Scene scene;
     
+	/* (non-Javadoc)
+	 * @see javafx.application.Application#start(javafx.stage.Stage)
+	 */
 	@Override
 	public void start(Stage primaryStage) {
 		//Declare a primary stage (will be used for everything)
@@ -36,7 +45,9 @@ public class Main extends Application {
         
 	}
 	
-	//Initializes the root layout.
+	/**
+	 * Initializes the root layout.
+	 */
     public void initRootLayout() {
         try {
             //Load root layout from RootLayout.fxml
@@ -55,7 +66,9 @@ public class Main extends Application {
         }
     }
     
-  //Shows the start view inside the root layout.
+  /**
+   * Show start view inside the root layout.
+   */
     public void showStartView() {
         try {
             //Load StartView from StartView.fxml
@@ -71,17 +84,20 @@ public class Main extends Application {
            viewcontroller.addScreen("SearchPeopleView", FXMLLoader.load(getClass().getResource("/view/SearchPeopleLayout.fxml" )));
            viewcontroller.addScreen("ShowPopularMovies", FXMLLoader.load(getClass().getResource("/view/ShowPopularMoviesLayout.fxml" )));
 
-
             //ViewControllers(scene);
             // Set Start view into the center of root layout.
             rootLayout.setCenter(startView);
-
-          
+     
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
 	
+	/**
+	 * The main method.
+	 *
+	 * @param args the arguments
+	 */
 	public static void main(String[] args) {
 		launch(args);
 	}

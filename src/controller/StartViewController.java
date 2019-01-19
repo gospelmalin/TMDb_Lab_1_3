@@ -28,7 +28,7 @@ public class StartViewController {
     @FXML
     void selectSearchPeople(ActionEvent event) {
     	System.out.println("Search People View should open"); //TODO TEMP
-    //	ViewController.activate("SearchPeopleView");
+    	ViewController.activate("SearchPeopleView");
 
     }
     

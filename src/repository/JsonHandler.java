@@ -13,6 +13,7 @@ import org.json.JSONObject;
 
 import repository.TMDbClient;
 import model.Movie;
+import model.Person;
 
 
 public class JsonHandler {
@@ -22,6 +23,7 @@ public class JsonHandler {
 	ArrayList<Movie> movies = new ArrayList<Movie>();
 	ArrayList<Movie> movieDetails = new ArrayList<Movie>();
 	private ArrayList<Movie> popularMovies= new ArrayList<Movie>();
+	private ArrayList<Person> persons = new ArrayList<Person>();
 
 	/**
 	 * @return the movies
@@ -62,6 +64,34 @@ public class JsonHandler {
 	 */
 	public void setMovieDetails(ArrayList<Movie> movieDetails) {
 		this.movieDetails = movieDetails;
+	}
+	
+	/**
+	 * @return the popularMovies
+	 */
+	public ArrayList<Movie> getPopularMovies() {
+		return popularMovies;
+	}
+
+	/**
+	 * @param popularMovies the popularMovies to set
+	 */
+	public void setPopularMovies(ArrayList<Movie> popularMovies) {
+		this.popularMovies = popularMovies;
+	}
+
+	/**
+	 * @return the persons
+	 */
+	public ArrayList<Person> getPersons() {
+		return persons;
+	}
+
+	/**
+	 * @param persons the persons to set
+	 */
+	public void setPersons(ArrayList<Person> persons) {
+		this.persons = persons;
 	}
 	
 	/**
@@ -290,6 +320,84 @@ public class JsonHandler {
 			}
 			return movieDetails;
 		}
+		
+		//Person related methods
+		
+		/**
+		 * Creates the person array from json string brought from TMDb.
+		 *
+		 * @param name the query name
+		 * @return the array list
+		 */
+		public ArrayList<Person> createPersonArrayFromJsonString(String name) {
+			TMDbClient tc = new TMDbClient();
+			String jsonString = tc.queryTMDbForPeople(name);
+			//JSONObject jsonObject = processJsonStringToJsonObject(jsonString);
+			persons = createPersonsFromJsonString(jsonString);
+		//	System.out.println("createPersonArrayFromJsonString prints persons: " + persons);
+			return persons ;
+		}
 	
-	
+		
+		public ArrayList<Person> createPersonsFromJsonString(String s) {
+			JSONObject jsonObject = processJsonStringToJsonObject(s);
+			String arrayName = "results";
+			JSONArray resultsArray = processJsonObjectToJsonArray(jsonObject, arrayName);
+			ArrayList<Person> persons = processJSONArrayAndCreatePerson(resultsArray);
+			return persons;	
+			
+		}
+		
+		private ArrayList<Person> processJSONArrayAndCreatePerson(JSONArray jsonArray) { 
+			try {
+				//Loop through the array and read all properties for the Person object to be created. Finally add it to the array list.
+				for (int i = 0; i < jsonArray.length(); i++) {
+					JSONObject jsonObject = jsonArray.getJSONObject(i);
+					int id = jsonObject.getInt("id");
+					boolean adult = jsonObject.getBoolean("adult");
+					String name = jsonObject.getString("name");
+					Double popularity = jsonObject.getDouble("popularity");
+					
+					JSONArray knownFor = jsonObject.getJSONArray("known_for");
+					//ArrayList<Movie> knownForMovies = processJSONArrayAndCreateMovie(knownFor);
+					
+					for (int j = 0; j < knownFor.length(); j++) {
+						JSONObject movieJsonObject = knownFor.getJSONObject(j);
+						int movieId = movieJsonObject.getInt("id");
+						String mediaType = movieJsonObject.getString("media_type");
+						if (mediaType.equals("movie")) {
+							String title = movieJsonObject.getString("title");
+							String overview = movieJsonObject.getString("overview"); //TODO temp removed
+							String releaseDate = movieJsonObject.getString("release_date"); //TODO temp removed
+							Double moviePopularity = movieJsonObject.getDouble("popularity"); //TODO temp removed
+							//create Movie object
+							//Movie movie = new Movie(movieId, title, overview, releaseDate, moviePopularity);//TODO temp replaced by below
+							Movie movie = new Movie(movieId, title);
+							//print movie
+							//System.out.println(movie); // Used during development only
+							//Add movie to movie array list
+							movies.add(movie);
+						}
+						
+					
+					}
+					ArrayList<Movie> knownForMovies = movies;
+					//create Person object
+					//Person person = new Person(id, adult, name, popularity);
+					Person person = new Person(id, adult, name, popularity, knownForMovies);
+					//print person
+				//	System.out.println(person); // Used during development only
+					//Add person to person array list
+					persons.add(person); 
+				
+				}
+			} catch (JSONException e) {
+				System.err.println("Oops! A JSONException occurred: " + e.getMessage());
+			  }
+			return persons;
+			
+		}
+
+		
+		
 }

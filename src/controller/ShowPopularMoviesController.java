@@ -65,7 +65,7 @@ public class ShowPopularMoviesController {
     private void initialize () {
     	System.out.println("ShowPopularMovieController initiated!");
     	
-    	String details = "x";
+    	String details = "";
     	updateMovieDetailsTextArea(details);
     	
     	
@@ -121,7 +121,7 @@ public class ShowPopularMoviesController {
     	
     	
     	movieDetailsTextArea.setText(h.getMovieDetails().toString());
-    	movieDetailsTextArea.getText(); // TODO is this needed?
+    //	movieDetailsTextArea.getText(); // TODO is this needed?
     	
     	//movieDetailsTextArea.setText(s);
     	// TODO
@@ -158,20 +158,7 @@ public class ShowPopularMoviesController {
     }
     
  private void updateMovieDetailsTextArea(String result) {
-    	
-    	// TODO
-    	
-    	//String s = result; //alt2
-		System.out.println("Test view controller updateResultTextArea prints result: " + result);
-	//	System.out.println("getting text in textArea");
-	//	movieDetailsTextArea.getText();
-		System.out.println("Test view controller calling setTExt");
-		movieDetailsTextArea.setText(result); //alt 1
-	//	movieDetailsTextArea.setText(s);//alt2
-		System.out.println("text set in textArea");
-		movieDetailsTextArea.getText();
-		System.out.println("Test view controller getting text in textArea");
-		
+		movieDetailsTextArea.setText(result); ;		
 	}
 
 }

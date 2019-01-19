@@ -426,8 +426,8 @@ public class JsonHandler {
 				boolean adult = jsonObject.getBoolean("adult");
 				String name = jsonObject.getString("name");
 				Double popularity = jsonObject.getDouble("popularity");
-				String birthday = jsonObject.getString("birthday");
-				//String deathday = jsonObject.getString("deathday"); //TODO TEMP
+				String birthday = jsonObject.optString("birthday", null);
+				String deathday = jsonObject.optString("deathday", null);
 				int genderIn = jsonObject.getInt("gender");
 				String gender = null;
 				switch (genderIn) {
@@ -442,15 +442,17 @@ public class JsonHandler {
 					System.out.println("Invalid value");
 					break;
 				}	
-				String biography = jsonObject.getString("biography");
+				String biography = jsonObject.optString("biography", null);
 				
 				//create person object
-				person = new Person(id, adult, name, popularity, 
-						knownForMovies, gender, biography);
 				/*
 				person = new Person(id, adult, name, popularity, 
+						knownForMovies, gender, biography);
+						*/
+				
+				person = new Person(id, adult, name, popularity, 
 						knownForMovies,	birthday, deathday, gender, biography);
-				*/
+				
 				//print person
 				System.out.println(person); // Used during development only
 				

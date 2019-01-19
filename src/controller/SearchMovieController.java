@@ -18,62 +18,94 @@ import model.Movie;
 import repository.JsonHandler;
 import utility.Util;
 
+/**
+ * The Class SearchMovieController handles what is related to the Search Movie view.
+ */
 public class SearchMovieController {
 
+    /** The movie id column. */
     @FXML
     private AnchorPane movieIdCol;
 
+    /** The movie title keyword text field. */
     @FXML
     private TextField movieTitleKeyword;
 
+    /** The search movie button. */
     @FXML
     private Button searchMovieBtn;
 
+    /** The movie table. */
     @FXML
     private TableView<Movie> movieTable;
 
+    /** The id column. */
     @FXML
     private TableColumn<Movie, Integer> idCol;
     
+    /** The title column. */
     @FXML
     private TableColumn<Movie, String> titleCol;
 
+    /** The overview column. */
     @FXML
     private TableColumn<Movie, String> overviewCol;
 
+    /** The movie details text area. */
     @FXML
     private TextArea movieDetailsTextArea;
 
+    /** The movie title text field. */
     @FXML
     private TextField movieTitleTxt;
 
+    /** The movie id text field. */
     @FXML
     private TextField movieIdTxt;
 
+    /** The show movie details button. */
     @FXML
     private Button showMovieDetailsBtn;
 
+    /** The home button. */
     @FXML
     private Button homeBtn;
     
+    /** The movie. */
     Movie m;
+    
+    /** The jsonHandler. */
     JsonHandler jH;
+    
+    /** The resulting movies ArrayList. */
     ArrayList<Movie> resultingMovies;
+    
+    /** The resulting movie details ArrayList. */
     ArrayList<Movie> resultingMovieDetails;
     
+
+    /**
+     * Initialize the controller class.
+     */
+    //This method is automatically called after the fxml file has been loaded.
     @FXML
     private void initialize () {
     	System.out.println("SearchMovieController initiated!");
-    	String details = "x";
+    	String details = "";
     	updateMovieDetailsTextArea(details);
     	// mouseclick eventhandler
-    	movieTable.setOnMouseClicked(this::TableClicked);//TODO
+    	movieTable.setOnMouseClicked(this::TableClicked);
     	// Match column with property
     	idCol.setCellValueFactory(new PropertyValueFactory<Movie, Integer>("id"));
     	titleCol.setCellValueFactory(new PropertyValueFactory<>("title"));
     	overviewCol.setCellValueFactory(new PropertyValueFactory<>("overview"));
     }
     
+    /**
+     * Table clicked.
+     *
+     * @param event the event
+     */
     @FXML
     private void TableClicked(MouseEvent event) {
         m = movieTable.getSelectionModel().getSelectedItem();
@@ -81,51 +113,41 @@ public class SearchMovieController {
         movieTitleTxt.setText(m.getTitle());
     }
 
+    /**
+     * Update movie details text area.
+     *
+     * @param result the result
+     */
     private void updateMovieDetailsTextArea(String result) {
-    	
-    	// TODO
-    	
-    	//String s = result; //alt2
-		System.out.println("Test view controller updateResultTextArea prints result: " + result);
-	//	System.out.println("getting text in textArea");
-	//	movieDetailsTextArea.getText();
-		System.out.println("Test view controller calling setTExt");
-		movieDetailsTextArea.setText(result); //alt 1
-	//	movieDetailsTextArea.setText(s);//alt2
-		System.out.println("text set in textArea");
-		movieDetailsTextArea.getText();
-		System.out.println("Test view controller getting text in textArea");
-		
+		movieDetailsTextArea.setText(result); 
 	}
 
+	/**
+	 * Open start view.
+	 *
+	 * @param event the event
+	 */
 	@FXML
     void openStartView(ActionEvent event) {
     	System.out.println("Start view should open");
     	ViewController.activate("StartView");
     }
 
+    /**
+     * Search movies.
+     *
+     * @param event the event
+     */
     @FXML
     void searchMovies(ActionEvent event) {
-    	System.out.println("searchMovies in SearchMovieController is called");
-    	
     	String titleKeyword = movieTitleKeyword.getText();
-    	System.out.println("This is titleKeyword entered in StartView search movie " + titleKeyword); //TODO TEMP
     	String message = null;
     	Util util = new Util();
     	titleKeyword = util.validateString(titleKeyword); // Validation of entered data	
 		// Creating instance of JsonHandler for parsing the JSON data
 		JsonHandler jH = new JsonHandler();
 		ArrayList<Movie> movies = jH.createMovieArrayFromJsonString(titleKeyword); //1
-		System.out.println("These are the movies in the array when recieved FROM jsonhandler: " + movies); //TODO TEMP
-		//2:alternative way of getting the movie data:
-		//jH.createMovieArrayFromJsonString(titleKeyword); 
-		//movies = jH.getMovies(); 
 		message = showMovies(movies);
-		System.out.println("This is the result message from Movie search: \n" + message); //TODO TEMP
-    	
-    	
-    	// TODO?
-    	
     	// Get the result into the array list used to build the table
     	resultingMovies = jH.getMovies();
 		// Update table
@@ -147,18 +169,18 @@ public class SearchMovieController {
 			double popularity = movies.get(i).getPopularity();
 			message = message + "\nMovie id: " + id + "\nTitle: " + title + "\nOverview: " + overview + "\nPopularity: " + popularity + "\n";
 		}
-		System.out.println("ShowMovies prints message: " + message); //TODO TEMP
 		return message;
 		
 	}
 
+    /**
+     * Show movie details.
+     *
+     * @param event the event
+     */
     @FXML
     void showMovieDetails(ActionEvent event) {
-
-    	System.out.println("showMovieDetails in SearchMovieController is called");
-    	
     	String idString = movieIdTxt.getText();
-    	System.out.println("This is selected id in searchmoviecontroller showMoviedetails " + idString); //TODO TEMP
     	String message = null;
     	Util util = new Util();
     	idString = util.validateString(idString); // Validation of entered data	
@@ -167,27 +189,17 @@ public class SearchMovieController {
     	h.createMovieDetailsArrayFromJsonString(idString, resultingMovies);
     	//h.createMovieDetailsArrayFromJsonString(idString); 
 		ArrayList<Movie> movieDetails = h.getMovieDetails(); 
-		System.out.println("These are the movie details for the selected movie when recieved FROM jsonhandler: " + movieDetails); //TODO TEMP
-		//
 		message = showMovies(movieDetails);
-		System.out.println("This is the result message from Movie Details search: \n" + message); //TODO TEMP
-    	
-    	
-    	// TODO?
-    	
     	// Get the result into the array list used to build the table
 		resultingMovieDetails = h.getMovieDetails();
 		// Update table
-    //	updateTable();
-    	
-    	
-    	movieDetailsTextArea.setText(h.getMovieDetails().toString());
-    	movieDetailsTextArea.getText(); // TODO is this needed?
-    	
-    	//movieDetailsTextArea.setText(s);
-    	// TODO
+		//	updateTable(); // Not in this version
+    	movieDetailsTextArea.setText(h.getMovieDetails().toString()); 	
     }
     
+  /**
+   * Update table.
+   */
   // Updating table with result from Db search
     private void updateTable() {
 		ObservableList<Movie> list = FXCollections.observableArrayList(resultingMovies);

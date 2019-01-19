@@ -91,7 +91,7 @@ public class SearchPeopleController {
     JsonHandler jH;
 
 	ArrayList<Person> resultingPersons;
-	ArrayList<Movie> knownForMovies;
+	ArrayList<Movie> knownForMovies = new ArrayList<Movie>();
     
     @FXML
     private void initialize () {
@@ -141,6 +141,8 @@ public class SearchPeopleController {
 
     @FXML
     void showSelectedPerson(ActionEvent event) {
+    	knownForMoviesTextArea.setText("");
+    	ArrayList<Movie> knownForMovies = new ArrayList<Movie>();
     	System.out.println("resultingPersons size when showSelectedPerson starts: " + resultingPersons.size());
     	System.out.println("Detta är resultingPersons: " + resultingPersons);
     	int id = Integer.parseInt(personIdTextField.getText());
@@ -150,7 +152,7 @@ public class SearchPeopleController {
     			System.out.println("knownForMovies sent as indata were: " + knownForMovies);
     		}
     	}
-    	
+    	String s="";
     	String idString = personIdTextField.getText();
     	System.out.println("selected id is: " + idString);
     	//int i = resultingPersons.indexOf(id);
@@ -173,7 +175,13 @@ public class SearchPeopleController {
     	//populate knownForMoviesTable
     	knownForMovies = selectedPerson.getKnownForMovies();
     	//updateKnownForMoviesTable();
-    	knownForMoviesTextArea.setText(knownForMovies.toString());
+    	for (int k=0; k<knownForMovies.size(); k++) {
+    		String movieTitle = knownForMovies.get(k).getTitle();
+    		s = s  + movieTitle + "\n"; 
+    	}
+    	
+    	knownForMoviesTextArea.setText(s);
+    	//knownForMoviesTextArea.setText(knownForMovies.toString());
     	
     }
     

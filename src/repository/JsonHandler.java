@@ -375,7 +375,7 @@ public class JsonHandler {
 					
 					JSONArray knownFor = jsonObject.getJSONArray("known_for");
 					//ArrayList<Movie> knownForMovies = processJSONArrayAndCreateMovie(knownFor);
-					
+					ArrayList<Movie> moviesForPerson = new ArrayList<Movie>();
 					for (int j = 0; j < knownFor.length(); j++) {
 						JSONObject movieJsonObject = knownFor.getJSONObject(j);
 						int movieId = movieJsonObject.getInt("id");
@@ -391,12 +391,14 @@ public class JsonHandler {
 							//print movie
 							//System.out.println(movie); // Used during development only
 							//Add movie to movie array list
-							movies.add(movie);
+							//movies.add(movie); //TEMP TEST
+							moviesForPerson.add(movie);
 						}
 	
 					}
-					ArrayList<Movie> knownForMovies = movies;
-					System.out.println("These are known for movies: " + movies);
+					ArrayList<Movie> knownForMovies = moviesForPerson;
+					//System.out.println("These are known for movies: " + movies);
+					System.out.println("These are known for movies: " + moviesForPerson);
 					//create Person object
 					//Person person = new Person(id, adult, name, popularity);
 					Person person = new Person(id, adult, name, popularity, knownForMovies);

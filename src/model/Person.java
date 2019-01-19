@@ -2,27 +2,56 @@ package model;
 
 import java.util.ArrayList;
 
+/**
+ * The Class Person is used to define a person object.
+ */
 public class Person {
+	
+	/** The id. */
 	private int id;
+	
+	/** The adult. */
 	private boolean adult;
 	//private Movie knownForMovie;
+	/** The name. */
 	//private TV knownForTV;
 	private String name;
+	
+	/** The popularity. */
 	private double popularity;
 	
+	/** The known for movies. */
 	private ArrayList<Movie> knownForMovies = new ArrayList<Movie>();
 	//private ArrayList<TV> knownForTVs = new ArrayList<TV>();
 
+	/** The birthday. */
 	// Person details
 	private String birthday;
+	
+	/** The deathday. */
 	private String deathday;
+	
+	/** The gender. */
 	private String gender;
+	
+	/** The biography. */
 	private String biography;
 	
+	/**
+	 * Instantiates a new person.
+	 */
 	public Person() {}
 	
 	
 
+	/**
+	 * Instantiates a new person.
+	 *
+	 * @param idIn the id in
+	 * @param adultIn the adult in
+	 * @param nameIn the name in
+	 * @param popularityIn the popularity in
+	 */
 	public Person(int idIn, boolean adultIn, String nameIn, Double popularityIn) {
 		id = idIn;
 		adult=adultIn;
@@ -30,6 +59,15 @@ public class Person {
 		popularity = popularityIn;
 	}
 	
+	/**
+	 * Instantiates a new person.
+	 *
+	 * @param idIn the id in
+	 * @param adultIn the adult in
+	 * @param nameIn the name in
+	 * @param popularityIn the popularity in
+	 * @param knownForMoviesIn the known for movies in
+	 */
 	public Person(int idIn, boolean adultIn, String nameIn, Double popularityIn, ArrayList<Movie> knownForMoviesIn) {
 		id = idIn;
 		adult=adultIn;
@@ -38,6 +76,17 @@ public class Person {
 		knownForMovies = knownForMoviesIn;
 	}
 	
+	/**
+	 * Instantiates a new person.
+	 *
+	 * @param id the id
+	 * @param adult the adult
+	 * @param name the name
+	 * @param popularity the popularity
+	 * @param knownForMovies the known for movies
+	 * @param gender the gender
+	 * @param biography the biography
+	 */
 	public Person(int id, boolean adult, String name, double popularity, ArrayList<Movie> knownForMovies,
 			String gender, String biography) {
 		this.id = id;
@@ -50,15 +99,17 @@ public class Person {
 	}
 
 	/**
-	 * @param id
-	 * @param adult
-	 * @param name
-	 * @param popularity
-	 * @param knownForMovies
-	 * @param birthday
-	 * @param deathday
-	 * @param gender
-	 * @param biography
+	 * Instantiates a new person.
+	 *
+	 * @param id the id
+	 * @param adult the adult
+	 * @param name the name
+	 * @param popularity the popularity
+	 * @param knownForMovies the known for movies
+	 * @param birthday the birthday
+	 * @param deathday the deathday
+	 * @param gender the gender
+	 * @param biography the biography
 	 */
 	public Person(int id, boolean adult, String name, double popularity, ArrayList<Movie> knownForMovies,
 			String birthday, String deathday, String gender, String biography) {
@@ -74,6 +125,8 @@ public class Person {
 	}
 
 	/**
+	 * Gets the id.
+	 *
 	 * @return the id
 	 */
 	public int getId() {
@@ -81,6 +134,8 @@ public class Person {
 	}
 
 	/**
+	 * Sets the id.
+	 *
 	 * @param id the id to set
 	 */
 	public void setId(int id) {
@@ -88,6 +143,8 @@ public class Person {
 	}
 
 	/**
+	 * Checks if is adult.
+	 *
 	 * @return the adult
 	 */
 	public boolean isAdult() {
@@ -95,6 +152,8 @@ public class Person {
 	}
 
 	/**
+	 * Sets the adult.
+	 *
 	 * @param adult the adult to set
 	 */
 	public void setAdult(boolean adult) {
@@ -103,6 +162,8 @@ public class Person {
 
 
 	/**
+	 * Gets the name.
+	 *
 	 * @return the name
 	 */
 	public String getName() {
@@ -110,6 +171,8 @@ public class Person {
 	}
 
 	/**
+	 * Sets the name.
+	 *
 	 * @param name the name to set
 	 */
 	public void setName(String name) {
@@ -117,6 +180,8 @@ public class Person {
 	}
 
 	/**
+	 * Gets the popularity.
+	 *
 	 * @return the popularity
 	 */
 	public double getPopularity() {
@@ -124,6 +189,8 @@ public class Person {
 	}
 
 	/**
+	 * Sets the popularity.
+	 *
 	 * @param popularity the popularity to set
 	 */
 	public void setPopularity(double popularity) {
@@ -131,6 +198,8 @@ public class Person {
 	}
 
 	/**
+	 * Gets the known for movies.
+	 *
 	 * @return the knownForMovies
 	 */
 	public ArrayList<Movie> getKnownForMovies() {
@@ -138,12 +207,17 @@ public class Person {
 	}
 
 	/**
+	 * Sets the known for movies.
+	 *
 	 * @param knownForMovies the knownForMovies to set
 	 */
 	public void setKnownForMovies(ArrayList<Movie> knownForMovies) {
 		this.knownForMovies = knownForMovies;
 	}
 	
+	/* (non-Javadoc)
+	 * @see java.lang.Object#toString()
+	 */
 	/*
 	public String toString() {
 		return "Person id: " + id + "\nName: " + name + "\nPopularity: " 
@@ -157,6 +231,8 @@ public class Person {
 	
 
 	/**
+	 * Gets the birthday.
+	 *
 	 * @return the birthday
 	 */
 	public String getBirthday() {
@@ -164,6 +240,8 @@ public class Person {
 	}
 
 	/**
+	 * Sets the birthday.
+	 *
 	 * @param birthday the birthday to set
 	 */
 	public void setBirthday(String birthday) {
@@ -171,6 +249,8 @@ public class Person {
 	}
 
 	/**
+	 * Gets the deathday.
+	 *
 	 * @return the deathday
 	 */
 	public String getDeathday() {
@@ -178,6 +258,8 @@ public class Person {
 	}
 
 	/**
+	 * Sets the deathday.
+	 *
 	 * @param deathday the deathday to set
 	 */
 	public void setDeathday(String deathday) {
@@ -185,6 +267,8 @@ public class Person {
 	}
 
 	/**
+	 * Gets the gender.
+	 *
 	 * @return the gender
 	 */
 	public String getGender() {
@@ -192,6 +276,8 @@ public class Person {
 	}
 
 	/**
+	 * Sets the gender.
+	 *
 	 * @param gender the gender to set
 	 */
 	public void setGender(String gender) {
@@ -199,6 +285,8 @@ public class Person {
 	}
 
 	/**
+	 * Gets the biography.
+	 *
 	 * @return the biography
 	 */
 	public String getBiography() {
@@ -206,6 +294,8 @@ public class Person {
 	}
 
 	/**
+	 * Sets the biography.
+	 *
 	 * @param biography the biography to set
 	 */
 	public void setBiography(String biography) {

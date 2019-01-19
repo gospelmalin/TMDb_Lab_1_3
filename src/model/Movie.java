@@ -2,6 +2,9 @@ package model;
 
 import java.util.ArrayList;
 
+/**
+ * The Class Movie for information about movies.
+ */
 public class Movie {
 	
 	/** The id. */
@@ -76,6 +79,9 @@ public class Movie {
 	
 	/**
 	 * Instantiates a new movie.
+	 *
+	 * @param idIn the id in
+	 * @param titleString the title string
 	 */
 	public Movie(int idIn, String titleString) {
 		id = idIn;
@@ -162,6 +168,8 @@ public class Movie {
 	}
 
 	/**
+	 * Checks if is adult.
+	 *
 	 * @return the adult
 	 */
 	public boolean isAdult() {
@@ -169,6 +177,8 @@ public class Movie {
 	}
 
 	/**
+	 * Sets the adult.
+	 *
 	 * @param adult the adult to set
 	 */
 	public void setAdult(boolean adult) {
@@ -176,6 +186,8 @@ public class Movie {
 	}
 
 	/**
+	 * Gets the belongs to collection.
+	 *
 	 * @return the belongsToCollection
 	 */
 	public Object getBelongsToCollection() {
@@ -183,6 +195,8 @@ public class Movie {
 	}
 
 	/**
+	 * Sets the belongs to collection.
+	 *
 	 * @param belongsToCollection the belongsToCollection to set
 	 */
 	public void setBelongsToCollection(Object belongsToCollection) {
@@ -190,6 +204,8 @@ public class Movie {
 	}
 
 	/**
+	 * Gets the original language.
+	 *
 	 * @return the originalLanguage
 	 */
 	public String getOriginalLanguage() {
@@ -197,6 +213,8 @@ public class Movie {
 	}
 
 	/**
+	 * Sets the original language.
+	 *
 	 * @param originalLanguage the originalLanguage to set
 	 */
 	public void setOriginalLanguage(String originalLanguage) {
@@ -204,6 +222,8 @@ public class Movie {
 	}
 
 	/**
+	 * Gets the original title.
+	 *
 	 * @return the originalTitle
 	 */
 	public String getOriginalTitle() {
@@ -211,6 +231,8 @@ public class Movie {
 	}
 
 	/**
+	 * Sets the original title.
+	 *
 	 * @param originalTitle the originalTitle to set
 	 */
 	public void setOriginalTitle(String originalTitle) {
@@ -218,6 +240,8 @@ public class Movie {
 	}
 
 	/**
+	 * Gets the release date.
+	 *
 	 * @return the releaseDate
 	 */
 	public String getReleaseDate() {
@@ -225,6 +249,8 @@ public class Movie {
 	}
 
 	/**
+	 * Sets the release date.
+	 *
 	 * @param releaseDate the releaseDate to set
 	 */
 	public void setReleaseDate(String releaseDate) {
@@ -232,6 +258,8 @@ public class Movie {
 	}
 
 	/**
+	 * Gets the vote count.
+	 *
 	 * @return the voteCount
 	 */
 	public int getVoteCount() {
@@ -239,6 +267,8 @@ public class Movie {
 	}
 
 	/**
+	 * Sets the vote count.
+	 *
 	 * @param voteCount the voteCount to set
 	 */
 	public void setVoteCount(int voteCount) {
@@ -246,6 +276,8 @@ public class Movie {
 	}
 
 	/**
+	 * Gets the budget.
+	 *
 	 * @return the budget
 	 */
 	public int getBudget() {
@@ -253,6 +285,8 @@ public class Movie {
 	}
 
 	/**
+	 * Sets the budget.
+	 *
 	 * @param budget the budget to set
 	 */
 	public void setBudget(int budget) {
@@ -260,6 +294,8 @@ public class Movie {
 	}
 
 	/**
+	 * Gets the status.
+	 *
 	 * @return the status
 	 */
 	public String getStatus() {
@@ -267,6 +303,8 @@ public class Movie {
 	}
 
 	/**
+	 * Sets the status.
+	 *
 	 * @param status the status to set
 	 */
 	public void setStatus(String status) {
@@ -274,6 +312,8 @@ public class Movie {
 	}
 
 	/**
+	 * Gets the tagline.
+	 *
 	 * @return the tagline
 	 */
 	public String getTagline() {
@@ -281,6 +321,8 @@ public class Movie {
 	}
 
 	/**
+	 * Sets the tagline.
+	 *
 	 * @param tagline the tagline to set
 	 */
 	public void setTagline(String tagline) {
@@ -288,6 +330,8 @@ public class Movie {
 	}
 
 	/**
+	 * Gets the vote average.
+	 *
 	 * @return the voteAverage
 	 */
 	public double getVoteAverage() {
@@ -295,6 +339,8 @@ public class Movie {
 	}
 
 	/**
+	 * Sets the vote average.
+	 *
 	 * @param voteAverage the voteAverage to set
 	 */
 	public void setVoteAverage(double voteAverage) {
@@ -302,6 +348,8 @@ public class Movie {
 	}
 
 	/**
+	 * Gets the genres.
+	 *
 	 * @return the genres
 	 */
 	public ArrayList<Object> getGenres() {
@@ -309,6 +357,8 @@ public class Movie {
 	}
 
 	/**
+	 * Sets the genres.
+	 *
 	 * @param genres the genres to set
 	 */
 	public void setGenres(ArrayList<Object> genres) {
@@ -316,6 +366,8 @@ public class Movie {
 	}
 
 	/**
+	 * Gets the production companies.
+	 *
 	 * @return the productionCompanies
 	 */
 	public ArrayList<Object> getProductionCompanies() {
@@ -323,6 +375,8 @@ public class Movie {
 	}
 
 	/**
+	 * Sets the production companies.
+	 *
 	 * @param productionCompanies the productionCompanies to set
 	 */
 	public void setProductionCompanies(ArrayList<Object> productionCompanies) {

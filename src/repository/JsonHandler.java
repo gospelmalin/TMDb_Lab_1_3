@@ -21,6 +21,7 @@ public class JsonHandler {
 	
 	ArrayList<Movie> movies = new ArrayList<Movie>();
 	ArrayList<Movie> movieDetails = new ArrayList<Movie>();
+	private ArrayList<Movie> popularMovies= new ArrayList<Movie>();
 
 	/**
 	 * @return the movies
@@ -78,6 +79,23 @@ public class JsonHandler {
 		movies = processJSONArrayAndCreateMovieArray(resultsArray);
 		printMoviesToTextFile(movies); // TODO added to get data into text file
 		return movies;	
+	}
+	
+	/**
+	 * Creates the most popular movies array from json string brought from TMDb.
+	 *
+	 * @param query the query
+	 * @return the array list
+	 */
+	public ArrayList<Movie> createPopularMoviesArrayFromJsonString() {
+		TMDbClient tc = new TMDbClient();
+		String jsonString = tc.queryTMDbForPopularMovies();
+		JSONObject jsonObject = processJsonStringToJsonObject(jsonString);
+		String arrayName = "results";
+		JSONArray resultsArray = processJsonObjectToJsonArray(jsonObject, arrayName);
+		popularMovies = processJSONArrayAndCreateMovieArray(resultsArray);
+		//printMoviesToTextFile(movies); // TODO added to get data into text file
+		return popularMovies;	
 	}
 	
 	/**
@@ -231,5 +249,47 @@ public class JsonHandler {
 			}
 			return movieDetails;
 		}
+		
+		public ArrayList<Movie> createMovieDetailsArrayFromJsonString(String idString, ArrayList <Movie> movieList) {
+			// Get data from movies arraylist for id = idString and add to movieDetails array
+			int id = Integer.parseInt(idString);
+			Movie detailedMovie = new Movie();
+			for (int i=0; i< movieList.size(); i++) {
+				if(movieList.get(i).getId() == id) {
+					detailedMovie.setId(movieList.get(i).getId());
+					detailedMovie.setTitle(movieList.get(i).getTitle());
+					detailedMovie.setOverview(movieList.get(i).getOverview());
+					detailedMovie.setPopularity(movieList.get(i).getPopularity());
+					detailedMovie.setOriginalTitle(movieList.get(i).getOriginalTitle());
+					detailedMovie.setOriginalLanguage(movieList.get(i).getOriginalLanguage());
+					detailedMovie.setVoteCount(movieList.get(i).getVoteCount());
+					detailedMovie.setVoteAverage(movieList.get(i).getVoteAverage());
+					//TODO more details
+					System.out.println("This is detailedMovie for id " + id + ": " + detailedMovie);
+					//movieDetails.add(detailedMovie); //TODO här?
+				}
+			}
+			// TODO Get further details from TMDb
+			TMDbClient tc = new TMDbClient();
+			String jsonString = tc.queryTMDbForMovieDetails(idString);
+			System.out.println("This is the jsonString cretated when quering for movie details " + jsonString);
+			JSONObject jsonObject = processJsonStringToJsonObject(jsonString);
+			try {
+				int budget = jsonObject.getInt("budget");
+				String status = jsonObject.getString("status");
+				String tagline = jsonObject.getString("tagline");
+			
+			// TODO lägg till further details från DMDb till movieDetailsArray
+				detailedMovie.setBudget(budget);
+				detailedMovie.setStatus(status);
+				detailedMovie.setTagline(tagline);
+				
+			movieDetails.add(detailedMovie); 
+			} catch (JSONException e) {
+				System.err.println("Oops! A JSONException occurred in createMovieDetailsArrayFromJsonString: " + e.getMessage());
+			}
+			return movieDetails;
+		}
+	
 	
 }

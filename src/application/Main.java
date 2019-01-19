@@ -68,7 +68,7 @@ public class Main extends Application {
             //Add all the views we want in our project here (name + location)
            viewcontroller.addScreen("SearchMovieView", FXMLLoader.load(getClass().getResource("/view/SearchMovieLayout.fxml" ))); 
            viewcontroller.addScreen("StartView", FXMLLoader.load(getClass().getResource("/view/StartView.fxml" )));
-       //  viewcontroller.addScreen("SearchPeopleView", FXMLLoader.load(getClass().getResource("/view/SearchPeopleLayout.fxml" )));
+           viewcontroller.addScreen("SearchPeopleView", FXMLLoader.load(getClass().getResource("/view/SearchPeopleLayout.fxml" )));
            viewcontroller.addScreen("ShowPopularMovies", FXMLLoader.load(getClass().getResource("/view/ShowPopularMoviesLayout.fxml" )));
 
 

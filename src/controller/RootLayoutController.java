@@ -28,7 +28,7 @@ public class RootLayoutController {
         Alert alert = new Alert (Alert.AlertType.INFORMATION);
         alert.setTitle("Program Information");
         alert.setHeaderText("A JavaFX application to search and view movie information from TMDb made by Malin");
-        alert.setContentText("Credit to TMDb");
+        alert.setContentText("Data provided by The Movie Database (TMDb).");
         alert.show();
     }
 }

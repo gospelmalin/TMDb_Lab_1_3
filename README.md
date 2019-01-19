@@ -1,6 +1,8 @@
 # TMDb_Lab_1_3
 
-Detta är en lab-uppgift i kursen Backendutveckling och systemintegration på Lernias YH-utbildning till Systemintegratör.
+En JavaFX-app där man kan välja att se en lista över de populäraste filmerna i The Movie Database, söka efter filmer eller personer, och att därefter hämta mer information om en utvald film eller person. 
+
+Detta är en lab-uppgift i kursen Backendutveckling och systemintegration på Lernias YH-utbildning till Systemintegratör. Uppgiften var att utforska tjänster från TMDbs API och göra en enkel applikation som konsumerar dessa. 
 Detta projekt avser uppgift 3 nedan.
 Labben är individuell och täcker följande färdigheter och kompetens:
 	• Utveckla backend‐system med moderna teknologier som är vanligt förekommande inom branschen (Fä1)

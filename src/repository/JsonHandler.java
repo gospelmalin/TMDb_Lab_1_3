@@ -24,6 +24,7 @@ public class JsonHandler {
 	ArrayList<Movie> movieDetails = new ArrayList<Movie>();
 	private ArrayList<Movie> popularMovies= new ArrayList<Movie>();
 	private ArrayList<Person> persons = new ArrayList<Person>();
+	private ArrayList<Person> selectedPersons = new ArrayList<Person>();
 
 	/**
 	 * @return the movies
@@ -94,6 +95,20 @@ public class JsonHandler {
 		this.persons = persons;
 	}
 	
+	/**
+	 * @return the selectedPersons
+	 */
+	public ArrayList<Person> getSelectedPersons() {
+		return selectedPersons;
+	}
+
+	/**
+	 * @param selectedPersons the selectedPersons to set
+	 */
+	public void setSelectedPersons(ArrayList<Person> selectedPersons) {
+		this.selectedPersons = selectedPersons;
+	}
+
 	/**
 	 * Creates the movie array from json string brought from TMDb.
 	 *
@@ -395,6 +410,56 @@ public class JsonHandler {
 				System.err.println("Oops! A JSONException occurred: " + e.getMessage());
 			  }
 			return persons;
+			
+		}
+
+		// Method to create selected person
+		public Person createSelectedPersonFromJsonString(int idIn, ArrayList<Movie> knownForMovies) {
+			System.out.println("id received by createSelectedPersonFromJsonString is " + idIn);
+			TMDbClient tc = new TMDbClient();
+			String jsonString = tc.queryTMDbForPersonDetails(idIn, knownForMovies);
+			JSONObject jsonObject = processJsonStringToJsonObject(jsonString);
+			//Person person = null;
+			Person person = new Person();
+			try {
+				int id = jsonObject.getInt("id");
+				boolean adult = jsonObject.getBoolean("adult");
+				String name = jsonObject.getString("name");
+				Double popularity = jsonObject.getDouble("popularity");
+				String birthday = jsonObject.getString("birthday");
+				//String deathday = jsonObject.getString("deathday"); //TODO TEMP
+				int genderIn = jsonObject.getInt("gender");
+				String gender = null;
+				switch (genderIn) {
+				case 0: gender = "No information";	
+					break;
+				case 1: gender = "Female";
+					break;
+				case 2: gender = "Male";
+					break;
+				default:
+					gender = "Invalid value";
+					System.out.println("Invalid value");
+					break;
+				}	
+				String biography = jsonObject.getString("biography");
+				
+				//create person object
+				person = new Person(id, adult, name, popularity, 
+						knownForMovies, gender, biography);
+				/*
+				person = new Person(id, adult, name, popularity, 
+						knownForMovies,	birthday, deathday, gender, biography);
+				*/
+				//print person
+				System.out.println(person); // Used during development only
+				
+				//Add person to person array list
+				selectedPersons.add(person);
+			} catch (JSONException e) {
+				System.err.println("Oops! A JSONException occurred in method createSelectedPersonFromJsonString: " + e.getMessage());
+			}
+			return person; 	
 			
 		}
 

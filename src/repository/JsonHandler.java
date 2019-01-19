@@ -200,7 +200,7 @@ public class JsonHandler {
 				int id = jsonObject.getInt("id");
 				String title = jsonObject.getString("title");
 				String overview = jsonObject.getString("overview");
-				String releaseDate = jsonObject.getString("release_date");
+				String releaseDate = jsonObject.optString("release_date", null);
 				Double popularity = jsonObject.getDouble("popularity");
 			//create Movie object
 				Movie movie = new Movie(id, title, overview, releaseDate, popularity);
@@ -382,21 +382,21 @@ public class JsonHandler {
 						String mediaType = movieJsonObject.getString("media_type");
 						if (mediaType.equals("movie")) {
 							String title = movieJsonObject.getString("title");
-							String overview = movieJsonObject.getString("overview"); //TODO temp removed
-							String releaseDate = movieJsonObject.getString("release_date"); //TODO temp removed
-							Double moviePopularity = movieJsonObject.getDouble("popularity"); //TODO temp removed
+							String overview = movieJsonObject.getString("overview"); 
+							String releaseDate = movieJsonObject.optString("release_date", null);
+							Double moviePopularity = movieJsonObject.getDouble("popularity");
 							//create Movie object
-							//Movie movie = new Movie(movieId, title, overview, releaseDate, moviePopularity);//TODO temp replaced by below
-							Movie movie = new Movie(movieId, title);
+							Movie movie = new Movie(movieId, title, overview, releaseDate, moviePopularity);//TODO temp replaced by below
+							//Movie movie = new Movie(movieId, title);
 							//print movie
 							//System.out.println(movie); // Used during development only
 							//Add movie to movie array list
 							movies.add(movie);
 						}
-						
-					
+	
 					}
 					ArrayList<Movie> knownForMovies = movies;
+					System.out.println("These are known for movies: " + movies);
 					//create Person object
 					//Person person = new Person(id, adult, name, popularity);
 					Person person = new Person(id, adult, name, popularity, knownForMovies);
@@ -406,6 +406,7 @@ public class JsonHandler {
 					persons.add(person); 
 				
 				}
+				System.out.println("These are in personsArray: " + persons);
 			} catch (JSONException e) {
 				System.err.println("Oops! A JSONException occurred: " + e.getMessage());
 			  }
@@ -416,6 +417,7 @@ public class JsonHandler {
 		// Method to create selected person
 		public Person createSelectedPersonFromJsonString(int idIn, ArrayList<Movie> knownForMovies) {
 			System.out.println("id received by createSelectedPersonFromJsonString is " + idIn);
+			System.out.println("KnownForMovies sent to createSelectedPersonFromJsonString were: " + knownForMovies);
 			TMDbClient tc = new TMDbClient();
 			String jsonString = tc.queryTMDbForPersonDetails(idIn, knownForMovies);
 			JSONObject jsonObject = processJsonStringToJsonObject(jsonString);

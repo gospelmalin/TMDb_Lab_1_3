@@ -9,6 +9,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
@@ -82,6 +83,9 @@ public class SearchPeopleController {
     @FXML
     private Button searchPersonBtn;
     
+    @FXML
+    private TextArea knownForMoviesTextArea;
+    
     Person p;
     Movie m;
     JsonHandler jH;
@@ -94,21 +98,35 @@ public class SearchPeopleController {
     	System.out.println("SearchPersonController initiated!");
     	
     	// mouseclick eventhandler
-    	personTable.setOnMouseClicked(this::TableClicked);//TODO
+    	personTable.setOnMouseClicked(this::TableClicked);
+    	
     	// Match column with property
+    	// personTable
     	personIdColumn.setCellValueFactory(new PropertyValueFactory<Person, Integer>("id"));
     	personNameColumn.setCellValueFactory(new PropertyValueFactory<Person, String>("name"));
     	personPopularityColumn.setCellValueFactory(new PropertyValueFactory<Person, Double>("popularity"));
-    
-    	//TODO initiera Known for movies table
+    	
+    	String result = "x";
+    	updateKnownForMoviesTextArea(result);
     }
     
-    @FXML
+    private void updateKnownForMoviesTextArea(String result) {
+    	knownForMoviesTextArea.setText(result); //alt 1
+	//	resultTextArea.setText(s);//alt2
+    	//resultTextArea.setText(h.getMovies().toString());
+		System.out.println("text set in textArea");
+		knownForMoviesTextArea.getText();
+		
+	}
+
+	@FXML
     private void TableClicked(MouseEvent event) {
         p = personTable.getSelectionModel().getSelectedItem();
         personIdTextField.setText(String.valueOf(p.getId())); // Convert to String.
         personNameTextField.setText(p.getName());
     }
+    
+   
 
     @FXML
     void openStartView(ActionEvent event) {
@@ -123,10 +141,23 @@ public class SearchPeopleController {
 
     @FXML
     void showSelectedPerson(ActionEvent event) {
+    	System.out.println("resultingPersons size when showSelectedPerson starts: " + resultingPersons.size());
+    	System.out.println("Detta är resultingPersons: " + resultingPersons);
     	int id = Integer.parseInt(personIdTextField.getText());
+    	for (int i=0; i<resultingPersons.size(); i++) {
+    		if (resultingPersons.get(i).getId() == id) {
+    			knownForMovies = resultingPersons.get(i).getKnownForMovies();
+    			System.out.println("knownForMovies sent as indata were: " + knownForMovies);
+    		}
+    	}
+    	
     	String idString = personIdTextField.getText();
     	System.out.println("selected id is: " + idString);
-    	ArrayList<Movie> knownForMovies = null; //TODO
+    	//int i = resultingPersons.indexOf(id);
+    	//System.out.println("i is " + i);
+    	//knownForMovies = resultingPersons.get(i).getKnownForMovies(); //TODO
+    	//System.out.println("knownForMovies sent as indata were: " + knownForMovies);
+    	//knownForMovies = null;
     	JsonHandler j = new JsonHandler();
     	Person selectedPerson = new Person();
     	selectedPerson = j.createSelectedPersonFromJsonString(id, knownForMovies);
@@ -139,6 +170,11 @@ public class SearchPeopleController {
     	deathdayTxt.setText(selectedPerson.getDeathday());
     	popularityTxt.setText(String.valueOf(selectedPerson.getPopularity()));
     	biographyTxt.setText(selectedPerson.getBiography());
+    	//populate knownForMoviesTable
+    	knownForMovies = selectedPerson.getKnownForMovies();
+    	//updateKnownForMoviesTable();
+    	knownForMoviesTextArea.setText(knownForMovies.toString());
+    	
     }
     
  // Updating table with result from Db search
@@ -146,6 +182,7 @@ public class SearchPeopleController {
 		ObservableList<Person> list = FXCollections.observableArrayList(resultingPersons);
 		personTable.setItems((ObservableList<Person>) list);
     }
+    
     
     @FXML
     void searchPerson(ActionEvent event) {

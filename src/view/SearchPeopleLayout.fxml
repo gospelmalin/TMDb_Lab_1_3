@@ -5,6 +5,7 @@
 <?import javafx.scene.control.Separator?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextArea?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
@@ -49,15 +50,10 @@
       <TextField fx:id="nameTxt" editable="false" layoutX="137.0" layoutY="288.0" prefHeight="25.0" prefWidth="124.0" promptText="name" />
       <Label layoutX="137.0" layoutY="271.0" text="Name" />
       <Label layoutX="383.0" layoutY="269.0" text="Known for movies" />
-      <TableView fx:id="knownForMoviesTable" layoutX="381.0" layoutY="286.0" prefHeight="109.0" prefWidth="214.0">
-         <columns>
-            <TableColumn fx:id="movieIdCol" editable="false" prefWidth="75.0" text="Movie id" />
-            <TableColumn fx:id="titleCol" editable="false" prefWidth="137.0" text="Title" />
-         </columns>
-      </TableView>
       <TextField fx:id="nameKeyword" layoutX="24.0" layoutY="50.0" prefHeight="25.0" prefWidth="157.0" promptText="Enter name" />
       <Button fx:id="searchPersonBtn" layoutX="193.0" layoutY="50.0" mnemonicParsing="false" onAction="#searchPerson" text="Search person" />
       <TextField fx:id="biographyTxt" editable="false" layoutX="84.0" layoutY="370.0" prefHeight="25.0" prefWidth="285.0" promptText="biography" />
       <Label layoutX="84.0" layoutY="354.0" text="Biography" />
+      <TextArea fx:id="knownForMoviesTextArea" editable="false" layoutX="379.0" layoutY="288.0" prefHeight="106.0" prefWidth="209.0" wrapText="true" />
    </children>
 </AnchorPane>

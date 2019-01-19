@@ -173,7 +173,7 @@ public class JsonHandler {
 	/**
 	 * Prints the movies.
 	 */
-	public void printMovies() {
+	private void printMovies() {
 		for (int i=0; i < movies.size(); i++) {
 			System.out.println(movies.get(i));
 		}	
@@ -402,7 +402,7 @@ public class JsonHandler {
 		 * @param s the s
 		 * @return the array list
 		 */
-		public ArrayList<Person> createPersonsFromJsonString(String s) {
+		private ArrayList<Person> createPersonsFromJsonString(String s) {
 			JSONObject jsonObject = processJsonStringToJsonObject(s);
 			String arrayName = "results";
 			JSONArray resultsArray = processJsonObjectToJsonArray(jsonObject, arrayName);
@@ -522,6 +522,4 @@ public class JsonHandler {
 			
 		}
 
-		
-		
 }

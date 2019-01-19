@@ -176,7 +176,7 @@ public class SearchPeopleController {
      * @param event the event
      */
     @FXML
-    void openStartView(ActionEvent event) {
+    private void openStartView(ActionEvent event) {
     	//System.out.println("Start view should open");
     	ViewController.activate("StartView");
     }
@@ -187,7 +187,7 @@ public class SearchPeopleController {
      * @param event the event
      */
     @FXML
-    void refreshTable(ActionEvent event) {
+    private void refreshTable(ActionEvent event) {
     	updateTable();
     }
 
@@ -197,7 +197,7 @@ public class SearchPeopleController {
      * @param event the event
      */
     @FXML
-    void showSelectedPerson(ActionEvent event) {
+    private void showSelectedPerson(ActionEvent event) {
     	knownForMoviesTextArea.setText("");
     	ArrayList<Movie> knownForMovies = new ArrayList<Movie>();
     	int id = Integer.parseInt(personIdTextField.getText());
@@ -246,7 +246,7 @@ public class SearchPeopleController {
      * @param event the event
      */
     @FXML
-    void searchPerson(ActionEvent event) {
+    private void searchPerson(ActionEvent event) {
     	String name = nameKeyword.getText();
        	String message = null;
     	Util util = new Util();

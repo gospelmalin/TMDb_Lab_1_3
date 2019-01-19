@@ -56,7 +56,7 @@ public class TMDbClient {
 	 * @param query the query
 	 * @return the string
 	 */
-	public String queryTMDbForMovies(String query) {
+	protected String queryTMDbForMovies(String query) {
 		String URL = searchMoviesUrlStart + query;
 		TMDbClient tc = new TMDbClient();
 		GenericType<String> string = new GenericType<String>() {};
@@ -75,7 +75,7 @@ public class TMDbClient {
 	 * @param query the query (id as string)
 	 * @return the string
 	 */
-	public String queryTMDbForMovieDetails(String query) {
+	protected String queryTMDbForMovieDetails(String query) {
 		String URL = urlMovieDetailsStart + query + searchDetailsUrlEnd;
 		TMDbClient tc = new TMDbClient();
 		GenericType<String> string = new GenericType<String>() {};
@@ -93,7 +93,7 @@ public class TMDbClient {
 	 *
 	 * @return the string
 	 */
-	public String queryTMDbForPopularMovies() {
+	protected String queryTMDbForPopularMovies() {
 		String URL = popularMoviesUrl;
 		TMDbClient tc = new TMDbClient();
 		GenericType<String> string = new GenericType<String>() {};
@@ -112,7 +112,7 @@ public class TMDbClient {
 	 * @param query the query
 	 * @return the string
 	 */
-	public String queryTMDbForPeople(String query) {
+	protected String queryTMDbForPeople(String query) {
 		String URL = searchPeopleUrlStart + query;
 		TMDbClient tc = new TMDbClient();
 		GenericType<String> string = new GenericType<String>() {};
@@ -132,7 +132,7 @@ public class TMDbClient {
 	 * @param knownForMovies the known for movies array
 	 * @return the string
 	 */
-	public String queryTMDbForPersonDetails(int id, ArrayList<Movie> knownForMovies) {
+	protected String queryTMDbForPersonDetails(int id, ArrayList<Movie> knownForMovies) {
 		String URL = urlPersonDetailsStart + id + searchDetailsUrlEnd;
 		TMDbClient tc = new TMDbClient();
 		GenericType<String> string = new GenericType<String>() {};

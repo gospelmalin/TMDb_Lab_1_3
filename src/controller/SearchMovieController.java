@@ -128,7 +128,7 @@ public class SearchMovieController {
 	 * @param event the event
 	 */
 	@FXML
-    void openStartView(ActionEvent event) {
+    private void openStartView(ActionEvent event) {
     	//System.out.println("Start view should open");
     	ViewController.activate("StartView");
     }
@@ -139,7 +139,7 @@ public class SearchMovieController {
      * @param event the event
      */
     @FXML
-    void searchMovies(ActionEvent event) {
+    private void searchMovies(ActionEvent event) {
     	String titleKeyword = movieTitleKeyword.getText();
     	String message = null;
     	Util util = new Util();
@@ -179,7 +179,7 @@ public class SearchMovieController {
      * @param event the event
      */
     @FXML
-    void showMovieDetails(ActionEvent event) {
+    private void showMovieDetails(ActionEvent event) {
     	String idString = movieIdTxt.getText();
     	String message = null;
     	Util util = new Util();

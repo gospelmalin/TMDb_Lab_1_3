@@ -164,7 +164,8 @@ public class SearchMovieController {
     	idString = util.validateString(idString); // Validation of entered data	
 		// Creating instance of JsonHandler for parsing the JSON data
     	JsonHandler h = new JsonHandler();
-    	h.createMovieDetailsArrayFromJsonString(idString); 
+    	h.createMovieDetailsArrayFromJsonString(idString, resultingMovies);
+    	//h.createMovieDetailsArrayFromJsonString(idString); 
 		ArrayList<Movie> movieDetails = h.getMovieDetails(); 
 		System.out.println("These are the movie details for the selected movie when recieved FROM jsonhandler: " + movieDetails); //TODO TEMP
 		//

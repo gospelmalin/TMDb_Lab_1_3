@@ -90,7 +90,7 @@ public class SearchMovieController {
     //This method is automatically called after the fxml file has been loaded.
     @FXML
     private void initialize () {
-    	System.out.println("SearchMovieController initiated!");
+    	//System.out.println("SearchMovieController initiated!");
     	String details = "";
     	updateMovieDetailsTextArea(details);
     	// mouseclick eventhandler

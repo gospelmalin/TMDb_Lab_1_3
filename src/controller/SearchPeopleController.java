@@ -132,7 +132,7 @@ public class SearchPeopleController {
  	//This method is automatically called after the fxml file has been loaded.
     @FXML
     private void initialize () {
-    	System.out.println("SearchPersonController initiated!");
+    	//System.out.println("SearchPersonController initiated!");
     	
     	// mouseclick eventhandler
     	personTable.setOnMouseClicked(this::TableClicked);
